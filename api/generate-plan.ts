@@ -5,16 +5,16 @@ import { buildPrompt, hasValidTrainings } from './buildPrompt';
 const GEMINI_API_KEY = process.env['GEMINI_API_KEY'];
 const GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent';
 
-
 type TypedResponse<T> = VercelResponse & { json: (body: T) => void };
 
 export default async function handler(
   req: VercelRequest,
   res: TypedResponse<GeneratePlanResponse | ErrorResponse>
 ) {
+  //  CORS
+  setCorsHeaders(req, res);
 
-  setCorsHeaders(res);
-
+  // Preflight request
   if (req.method === 'OPTIONS') {
     return res.status(200).end();
   }
@@ -27,6 +27,7 @@ export default async function handler(
   }
 
   try {
+    // ===== VALIDAÇÃO DA API KEY =====
     if (!GEMINI_API_KEY) {
       console.error('GEMINI_API_KEY não configurada nas variáveis de ambiente!');
       return res.status(500).json({
@@ -34,7 +35,7 @@ export default async function handler(
       });
     }
 
-
+    // ===== VALIDAÇÃO DO BODY =====
     const { trainings, goal } = req.body as GeneratePlanRequest;
 
     console.log('Dados recebidos:', {
@@ -53,6 +54,8 @@ export default async function handler(
         error: 'Nenhum treino válido encontrado. Preencha pelo menos um treino.'
       });
     }
+
+    // ===== CONSTRUÇÃO DO PROMPT =====
     const prompt = buildPrompt(trainings, goal);
     console.log('Prompt construído com sucesso');
 
@@ -76,16 +79,26 @@ export default async function handler(
   }
 }
 
-function setCorsHeaders(res: VercelResponse): void {
-  res.setHeader('Access-Control-Allow-Origin', '*');
+function setCorsHeaders(req: VercelRequest, res: VercelResponse): void {
+  const origin = req.headers.origin;
+
+  // Permite qualquer origem do Vercel temporariamente
+  if (origin && (
+    origin.includes('localhost') ||
+    origin.includes('vercel.app')
+  )) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
+  }
+
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
   res.setHeader(
     'Access-Control-Allow-Headers',
     'Content-Type, Authorization, X-Requested-With, Accept, Origin'
   );
-  res.setHeader('Access-Control-Allow-Credentials', 'true');
-} // lembrar de trocar para o link do sistema em prod
+}
 
+// ===== CHAMADA À API DO GEMINI =====
 async function callGeminiApi(prompt: string): Promise<string> {
   const requestBody: GeminiRequest = {
     contents: [{
