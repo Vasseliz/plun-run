@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: '/api/generate-plan.ts'
+  apiUrl: '/api/generate-plan'
 };
