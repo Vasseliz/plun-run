@@ -1,0 +1,226 @@
+.app-container {
+  min-height: 100vh;
+  background: #fafafa;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  color: #1a1a1a;
+}
+
+.app-header {
+  background: #ffffff;
+  border-bottom: 1px solid #e5e5e5;
+  padding: 1.25rem 1rem;
+  margin-bottom: 3rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.header-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.header-content::before {
+  content: '';
+  display: block;
+  min-width: 70px;
+  min-height: 70px;
+  background: url('/assets/images/plan-run.png') no-repeat center;
+  background-size: contain;
+  flex-shrink: 0; /*pro itemnão encolher*/
+}
+
+.app-header h1 {
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin: 0 0 0.25rem 0;
+  color: #1a1a1a;
+  letter-spacing: -0.02em;
+}
+
+.header-subtitle {
+  font-size: 0.95rem;
+  color: #666;
+  line-height: 1.5;
+  font-weight: 400;
+  margin: 0;
+}
+
+.app-main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem 4rem;
+}
+
+.section-form,
+.section-list,
+.section-result {
+  margin-bottom: 2rem;
+}
+
+.app-footer {
+  background: #1a1a1a;
+  color: #e5e5e5;
+  margin-top: 4rem;
+  padding: 2.5rem 1rem;
+  border-top: 1px solid #333;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+}
+
+.footer-credits {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #fff;
+  margin: 0;
+}
+
+.footer-warning {
+  font-size: 0.875rem;
+  color: #999;
+  line-height: 1.5;
+  margin: 0;
+  text-align: right;
+}
+
+@media (max-width: 1024px) {
+  .app-container {
+    padding: 0;
+  }
+
+  .app-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .header-subtitle {
+    font-size: 0.875rem;
+  }
+
+  .header-content::before {
+    width: 60px;
+    height: 60px;
+  }
+}
+
+@media (max-width: 768px) {
+  .app-header {
+    padding: 1.25rem 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .header-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+  }
+
+  .header-content::before {
+    width: 55px;
+    height: 55px;
+  }
+
+  .app-header h1 {
+    font-size: 1.375rem;
+  }
+
+  .header-subtitle {
+    font-size: 0.875rem;
+  }
+
+  .app-main {
+    padding: 0 0.75rem 3rem;
+  }
+
+  .section-form,
+  .section-list,
+  .section-result {
+    margin-bottom: 1.5rem;
+  }
+
+  .app-footer {
+    margin-top: 3rem;
+    padding: 2rem 1rem;
+  }
+
+  .footer-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+  }
+
+  .footer-credits {
+    font-size: 0.875rem;
+  }
+
+  .footer-warning {
+    font-size: 0.8125rem;
+    text-align: center;
+  }
+}
+
+/* Mobile Pequeno (até 480px) */
+@media (max-width: 480px) {
+  .header-content::before {
+    width: 50px;
+    height: 50px;
+  }
+
+  .app-header h1 {
+    font-size: 1.25rem;
+  }
+
+  .header-subtitle {
+    font-size: 0.8125rem;
+  }
+
+  .footer-warning {
+    font-size: 0.75rem;
+  }
+}
+ /*auxiliar na acessibilidade */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media (prefers-contrast: high) {
+  .app-header {
+    border-bottom: 2px solid #000;
+  }
+
+  .app-footer {
+    border-top: 2px solid #fff;
+  }
+}
+
+@media print {
+  .app-container {
+    background: white;
+  }
+
+  .app-header,
+  .app-footer {
+    background: white;
+    color: black;
+    border: none;
+  }
+
+  .header-content::before {
+    display: none;
+  }
+
+  .footer-warning {
+    color: #333;
+  }
+}

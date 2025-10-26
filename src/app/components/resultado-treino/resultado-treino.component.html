@@ -1,0 +1,49 @@
+<div class="resultado-container" *ngIf="hasContent()">
+
+  <div class="loading-state" *ngIf="loading">
+    <div class="spinner"></div>
+    <h3>Gerando seu plano personalizado...</h3>
+    <p>Aguarde a IA está analisando seus treinos e criando o melhor planejamento para você.</p>
+  </div>
+
+  <div class="error-state" *ngIf="error && !loading">
+    <div class="error-icon">❌</div>
+    <h3>Ops! Algo deu errado</h3>
+    <div class="error-message">{{ error }}</div>
+    <button class="btn-retry" (click)="onNewPlan()">
+      Tentar Novamente
+    </button>
+  </div>
+
+  <div class="success-state" *ngIf="planoTreino && !loading && !error">
+    <div class="resultado-header">
+      <div class="success-badge">
+        <span class="badge-text">Plano Gerado com Sucesso!</span>
+      </div>
+      <h3>Seu Plano de Treino Personalizado</h3>
+    </div>
+
+    <div class="plano-content">
+      <div class="plano-text" [innerHTML]="formatPlano(planoTreino)"></div>
+    </div>
+
+    <div class="resultado-actions">
+      <button class="btn-secondary" (click)="onNewPlan()">
+        Gerar Novo Plano
+      </button>
+      <button class="btn-primary" (click)="onDownloadPdf()">
+        Baixar PDF
+      </button>
+    </div>
+
+    <div class="disclaimer">
+      <p>
+        <strong>Dica:</strong> Imprima ou salve este plano para consultar durante seus treinos.
+      </p>
+      <p class="warning">
+        ⚠️ Este plano foi gerado automaticamente por IA. Consulte sempre um profissional de educação física antes de iniciar qualquer programa de treinamento.
+      </p>
+    </div>
+  </div>
+
+</div>
