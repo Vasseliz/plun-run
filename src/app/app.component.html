@@ -20,12 +20,6 @@
       ></app-formulario-treino>
     </section>
 
-    <section class="section-list">
-      <app-lista-treino
-        [trainings]="trainings"
-      ></app-lista-treino>
-    </section>
-
     <section class="section-result">
       <app-resultado-treino
         [planoTreino]="planoTreino"
@@ -35,6 +29,14 @@
         (newPlan)="onNewPlan()"
       ></app-resultado-treino>
     </section>
+
+    <section class="section-list">
+      <app-lista-treino
+        [trainings]="trainings"
+      ></app-lista-treino>
+    </section>
+
+
   </main>
 
   <footer class="app-footer">
