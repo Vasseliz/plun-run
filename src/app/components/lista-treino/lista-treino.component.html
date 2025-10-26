@@ -1,1 +1,67 @@
-<p>lista-treino works!</p>
+<div class="lista-container" *ngIf="hasFilledTrainings()">
+  <div class="lista-header">
+    <h3>Resumo da Semana</h3>
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-content">
+        <div class="stat-value">{{ getFilledTrainings().length }}</div>
+        <div class="stat-label">Treinos</div>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-content">
+        <div class="stat-value">{{ getTotalDistance().toFixed(1) }}km</div>
+        <div class="stat-label">Distância Total</div>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-content">
+        <div class="stat-value">{{ formatTime(getTotalTime()) }}</div>
+        <div class="stat-label">Tempo Total</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="treinos-list">
+    <div
+      *ngFor="let training of getFilledTrainings()"
+      class="treino-card"
+    >
+      <div class="treino-day">
+        <span class="day-badge">{{ training.dia }}</span>
+      </div>
+
+      <div class="treino-details">
+        <div class="detail-row" *ngIf="training.tipo">
+          <span class="detail-label">Tipo:</span>
+          <span class="detail-value">
+          </span>
+        </div>
+
+        <div class="detail-row" *ngIf="training.distanciaKm && training.distanciaKm > 0">
+          <span class="detail-label">Distância:</span>
+          <span class="detail-value">{{ training.distanciaKm }}km</span>
+        </div>
+
+        <div class="detail-row" *ngIf="training.tempoMinutos && training.tempoMinutos > 0">
+          <span class="detail-label">Tempo:</span>
+          <span class="detail-value">{{ formatTime(training.tempoMinutos) }}</span>
+        </div>
+
+        <div class="detail-row" *ngIf="training.ritmo">
+          <span class="detail-label">Ritmo:</span>
+          <span class="detail-value">{{ training.ritmo }}</span>
+        </div>
+
+        <div class="detail-row full-width" *ngIf="training.observacoes">
+          <span class="detail-label">Observações:</span>
+          <span class="detail-value observation">{{ training.observacoes }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
