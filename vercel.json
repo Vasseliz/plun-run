@@ -7,6 +7,10 @@
       "config": {
         "distDir": "dist/treino-corrida/browser"
       }
+    },
+    {
+      "src": "api/**/*.ts",
+      "use": "@vercel/node"
     }
   ],
   "routes": [
