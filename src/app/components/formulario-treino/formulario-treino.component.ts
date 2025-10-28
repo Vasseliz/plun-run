@@ -15,6 +15,7 @@ import { DAYS_OF_WEEK, TRAINING_TYPES, GOAL_TYPES, GOAL_PLACEHOLDERS } from 'src
 export class FormularioTreinoComponent {
   @Input() trainings: Training[] = [];
   @Input() goal: TrainingGoal = { tipo: '', detalhes: '' };
+  @Input() loading: boolean = false;
 
   @Output() trainingsChange = new EventEmitter<Training[]>();
   @Output() goalChange = new EventEmitter<TrainingGoal>();

@@ -176,7 +176,7 @@
       type="button"
       class="btn-primary"
       (click)="onGeneratePlan()"
-      [disabled]="getFilledTrainingsCount() === 0"
+      [disabled]="getFilledTrainingsCount() === 0 || loading"
     >
       Gerar Plano com IA
     </button>
